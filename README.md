@@ -10,7 +10,7 @@
 | `kit/selftest.mjs` | ยิงทดสอบทุก endpoint: envelope, pagination, DTO, 400/404/409, CRUD, filter, sort, nested route |
 | `kit/doctor.mjs` | ตรวจเครื่องก่อนเริ่ม: Node, package, app.js, การต่อ MySQL, port 3000 |
 | `kit/pack.mjs` | zip งานส่งเป็น `<รหัส>_exam.zip` โดยตัด `node_modules` ออกและตรวจไฟล์ให้ |
-| `kit/offline-install.mjs` | ถ้า `npm install` ไม่ได้ จะแตก `vendor/node_modules.zip` (express 5, mysql2, http-status) ลงโปรเจกต์ |
+| `kit/offline-install.mjs` | ถ้า `npm install` ไม่ได้ จะแตก `vendor/node_modules.zip` (express 5, mysql2, http-status, nodemon) ลงโปรเจกต์ |
 | `core/` | ไฟล์กลางที่ใช้ได้กับทุกโจทย์: `error-handler.js`, `api-response.js`, `pagination-middleware.js` |
 | `example/` | เฉลยข้อสอบซ้อม 9 ต.ค. ที่ gen สร้าง (ผ่าน test 100/100) เปิดอ่านโค้ดได้ทันที |
 | `docs/` | [วันสอบทีละขั้น](docs/EXAM-DAY.md) · [Cheatsheet](docs/CHEATSHEET.md) · [โจทย์แบบต่าง ๆ](docs/SCENARIOS.md) · [error ที่เจอบ่อย](docs/PITFALLS.md) |

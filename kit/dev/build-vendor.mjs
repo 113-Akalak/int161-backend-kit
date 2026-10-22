@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 // Rebuilds vendor/node_modules.zip (needs internet): installs the pinned dependencies into work/vendor-build and zips them.
+// Optional dependencies are left out so the zip stays pure JavaScript (chokidar's fsevents is a macOS-only native module).
 //
 //   node kit/dev/build-vendor.mjs
 import { execSync } from 'node:child_process'
@@ -15,7 +16,7 @@ const build = join(KIT, 'work', 'vendor-build')
 rmSync(build, { recursive: true, force: true })
 mkdirSync(build, { recursive: true })
 writeFileSync(join(build, 'package.json'), JSON.stringify({ name: 'vendor-build', private: true, type: 'module', dependencies: deps }, null, 2))
-execSync('npm install --omit=dev --no-audit --no-fund --ignore-scripts', { cwd: build, stdio: 'inherit' })
+execSync('npm install --omit=dev --omit=optional --no-audit --no-fund --ignore-scripts', { cwd: build, stdio: 'inherit' })
 
 const entries = []
 function walk(dir) {

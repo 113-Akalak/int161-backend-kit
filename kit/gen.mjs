@@ -191,11 +191,13 @@ function build(cfg) {
             if (!pkg.dependencies?.[dep] && !pkg.devDependencies?.[dep]) notes.push(c.red(`package.json does not list ${dep} — run: npm install ${dep}  (offline: node <kit>/kit/offline-install.mjs <project>)`))
         }
         if (!pkg.scripts?.start) notes.push(c.yellow('package.json has no "start" script — add  "start": "node src/app.js"'))
+        if (!pkg.scripts?.dev) notes.push(c.dim('auto-restart: npx nodemon src/app.js  (or add  "dev": "nodemon src/app.js"  and run npm run dev)'))
     } else {
         writer.write('package.json', JSON.stringify({
             name: projectName(project).toLowerCase(), version: '1.0.0', type: 'module', main: 'src/app.js',
-            scripts: { start: 'node src/app.js', dev: 'node --watch src/app.js' },
-            dependencies: { express: '^5.1.0', mysql2: '^3.14.0' }
+            scripts: { start: 'node src/app.js', dev: 'nodemon src/app.js' },
+            dependencies: { express: '^5.1.0', mysql2: '^3.14.0' },
+            devDependencies: { nodemon: '^3.1.14' }
         }, null, 2) + '\n', { label: 'new package.json' })
     }
 

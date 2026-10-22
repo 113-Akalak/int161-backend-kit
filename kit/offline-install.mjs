@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 // Fallback when "npm install" cannot run (no internet / npm error): unpack the bundled node_modules
-// (express 5 + mysql2 + http-status, pure JavaScript, works on Windows/macOS/Linux) into the project.
+// (express 5 + mysql2 + http-status + nodemon, pure JavaScript, works on Windows/macOS/Linux) into the project.
 //
 //   node kit/offline-install.mjs <project> [--force]
 //
 // Existing packages are kept unless --force. Packages the project needs but the bundle lacks are listed.
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+// node_modules/.bin launchers (nodemon, nodemon.cmd) are written too, so "npm run dev" / "npx nodemon" work.
+import { chmodSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join, resolve, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { readZip } from './lib/zip.mjs'
@@ -49,6 +50,27 @@ for (const e of entries) {
     written++
 }
 console.log(`Unpacked ${written} files into ${target}${skippedPackages.size ? ` (kept ${skippedPackages.size} packages already installed; --force to replace)` : ''}`)
+
+// the zip has no .bin folder: write the same launchers npm would (sh for macOS/Linux, .cmd for Windows)
+const binDir = join(target, '.bin')
+const bins = []
+for (const pkgName of new Set(entries.map(e => topLevel(e.name)))) {
+    const p = join(target, pkgName, 'package.json')
+    if (!existsSync(p)) continue
+    const meta = JSON.parse(readFileSync(p, 'utf8'))
+    const map = typeof meta.bin === 'string' ? { [pkgName.split('/').pop()]: meta.bin } : meta.bin || {}
+    for (const [cmd, file] of Object.entries(map)) {
+        const rel = `${pkgName}/${file.replace(/^\.\//, '')}`
+        const sh = join(binDir, cmd)
+        if (!force && existsSync(sh)) continue
+        mkdirSync(binDir, { recursive: true })
+        writeFileSync(sh, `#!/bin/sh\nexec node "$(dirname "$0")/../${rel}" "$@"\n`)
+        chmodSync(sh, 0o755)
+        writeFileSync(`${sh}.cmd`, `@node "%~dp0\\..\\${rel.split('/').join('\\')}" %*\r\n`)
+        bins.push(cmd)
+    }
+}
+if (bins.length) console.log(`  .bin: ${bins.join(', ')}${bins.includes('nodemon') ? '  (auto-restart: npx nodemon src/app.js)' : ''}`)
 
 // compare with the project's package.json
 const pkgPath = join(project, 'package.json')

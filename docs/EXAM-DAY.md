@@ -93,7 +93,8 @@ node %KIT%\kit\selftest.mjs .              :: ของ kit (ตรวจกว�
 
 **วนทำ:** อ่าน FAIL → แก้ → **restart server** → รัน test ใหม่
 - WebStorm ถามว่า "Stop and Rerun" ให้กด ไม่งั้นยังรันโค้ดเก่า
-- ถ้าใช้ `npm run dev` (`node --watch`) server จะ restart เอง
+- ถ้ารันด้วย `npx nodemon src/app.js` แทน `npm start` server จะ restart เองทุกครั้งที่ save (ถ้า template มี script `dev` ใช้ `npm run dev` ก็ได้)
+- nodemon มาพร้อม `offline-install` แล้ว ถ้า `npm install` ปกติ ให้ลงเพิ่มตอนยังมีเน็ต: `npm install -D nodemon`
 
 | test บอก | ดูที่ |
 |---|---|

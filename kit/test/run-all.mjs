@@ -82,6 +82,10 @@ if (!only.length || only.includes('teacher')) {
     results.push({ name: 'teacher: original app.js lines kept', passed: kept })
     console.log(`${kept ? 'ok  ' : 'FAIL'} teacher: original app.js lines kept`)
     step('teacher: offline-install', node([join(KIT, 'kit/offline-install.mjs'), dir]))
+    const nodemonBin = join(dir, 'node_modules/.bin/nodemon')
+    step('teacher: nodemon launcher', existsSync(nodemonBin) && existsSync(nodemonBin + '.cmd')
+        ? spawnSync(nodemonBin, ['--version'], { encoding: 'utf8', timeout: 30000 })
+        : { status: 1, stdout: '', stderr: 'node_modules/.bin/nodemon missing' }, /^\d+\.\d+\.\d+/)
     step('teacher: selftest', node([join(KIT, 'kit/dev/sandbox.mjs'), dir, '--port', '3996', '--', process.execPath, join(KIT, 'kit/selftest.mjs'), dir, '--config', cfg]), / passed /)
     if (existsSync(join(KIT, 'fixtures/mobile/test-runner.mjs'))) {
         mkdirSync(join(dir, 'tests'), { recursive: true })
