@@ -1,0 +1,3 @@
+# classicmodels mock: payment errors use their own code, amount must be a JSON number
+payments.validation.code=INVALID_PAYMENT_DATA
+payments.validation.strictNumbers=true

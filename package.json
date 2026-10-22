@@ -1,0 +1,24 @@
+{
+  "name": "int161-backend-kit",
+  "version": "1.0.0",
+  "description": "Offline exam kit for INT161 Basic Backend (Express 5 + MySQL): generator, self-test, packer, cheatsheet",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.18"
+  },
+  "scripts": {
+    "gen": "node kit/gen.mjs",
+    "selftest": "node kit/selftest.mjs",
+    "doctor": "node kit/doctor.mjs",
+    "pack": "node kit/pack.mjs",
+    "offline-install": "node kit/offline-install.mjs",
+    "test": "node kit/test/run-all.mjs"
+  },
+  "vendorDependencies": {
+    "express": "^5.1.0",
+    "mysql2": "^3.14.0",
+    "http-status": "^2.1.0"
+  }
+}

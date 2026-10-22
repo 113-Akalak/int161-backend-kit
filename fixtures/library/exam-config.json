@@ -1,0 +1,22 @@
+{
+  "parent": "authors",
+  "child": "books",
+  "summaryKeys": ["id", "isbn", "title", "authorId", "genre", "price", "status"],
+  "detailKeys": ["id", "isbn", "title", "authorId", "authorName", "genre", "price", "pages", "language", "stockQuantity", "status", "publishedDate"],
+  "uniqueField": "isbn",
+  "nameField": "title",
+  "fkField": "author_id",
+  "newItem": {
+    "isbn": "TEST-{uniq}",
+    "title": "Test Book 2026",
+    "author_id": 1,
+    "genre": "FANTASY",
+    "price": 499.00,
+    "pages": 320,
+    "language": "Thai",
+    "stock_quantity": 10,
+    "status": "IN_STOCK",
+    "published_date": "2026-01-01"
+  },
+  "filter": { "field": "genre", "value": "PROGRAMMING", "sortField": "price" }
+}

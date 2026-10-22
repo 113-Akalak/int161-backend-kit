@@ -1,0 +1,9 @@
+node_modules/
+work/
+*.zip
+!vendor/node_modules.zip
+.DS_Store
+Thumbs.db
+test-report-*.json
+.idea/
+.vscode/
