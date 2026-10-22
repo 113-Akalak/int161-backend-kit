@@ -25,7 +25,7 @@
 ```bat
 :: 1) ช่วง 15 นาทีแรกที่ใช้เน็ตได้
 ::    โหลดไฟล์ของอาจารย์ (spec .md, template, init-database.sql, tests) และโหลด kit นี้:
-::    https://github.com/aklkbqx/int161-backend-kit/archive/refs/heads/main.zip
+::    https://github.com/113-Akalak/int161-backend-kit/archive/refs/heads/main.zip
 ::    แตก zip ไว้ข้างกัน เช่น  Desktop\exam\<โปรเจกต์>  และ  Desktop\exam\int161-backend-kit-main
 cd Desktop\exam\<โปรเจกต์>
 npm install

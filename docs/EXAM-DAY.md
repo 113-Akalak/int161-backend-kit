@@ -42,7 +42,7 @@
    - template zip
    - `init-database.sql`
    - `tests.zip` ถ้ามี
-2. **โหลด kit (ถ้าอนุญาต)** จาก `https://github.com/aklkbqx/int161-backend-kit/archive/refs/heads/main.zip`
+2. **โหลด kit (ถ้าอนุญาต)** จาก `https://github.com/113-Akalak/int161-backend-kit/archive/refs/heads/main.zip`
 3. **แตก zip ทั้งหมด** เช่น
    ```
    Desktop\exam\<โปรเจกต์>\               <- template ของอาจารย์ (ตัวที่จะส่ง)
